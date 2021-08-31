@@ -5,7 +5,7 @@ class SiteHeader extends Component {
     render() { 
         return ( 
             <header className="main-header">
-                <h1>Note.ly</h1>
+                <h1 className="main-header_h1">Note.ly</h1>
             </header>
         );
     }

@@ -3,10 +3,24 @@ import CardNota from '../CardNota/cardNota';
 import "./estilo.css"
 
 class ListaDeNotas extends Component {
+
+    constructor(){
+        super();
+        this.state = {notes:[]}
+    }
+
+    componentDidMount(){
+        this.props.notes.subscribe(this._newNotes.bind(this))
+    }
+
+    _newNotes(notes){
+        this.setState({...this.state, notes})
+    }
+
     render() {
         return ( 
         <ul className="lista-notas">
-            {this.props.notes.map((note, index) =>{
+            {this.state.notes.map((note, index) =>{
                 return(
                     <li className="lista-notas_item" key ={index}>
                         <CardNota 
@@ -15,7 +29,7 @@ class ListaDeNotas extends Component {
                         //através do props
                         listExcludeNote={this.props.listExcludeNote}
                         title={note.title} 
-                        noteText={note.note}
+                        noteText={note.noteText}
                         category = {note.category}/>
                     </li>
                 );

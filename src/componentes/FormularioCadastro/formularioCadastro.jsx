@@ -8,6 +8,16 @@ class FormularioCadastro extends Component{
         this.title = "";
         this.noteText="";
         this.category="N/A";
+        this.state= {categories:[]}
+    }
+
+    componentDidMount(){
+        this.props.categories.subscribe(this._newCategories.bind(this));
+    }
+
+    _newCategories(categories){
+        {/* updating list state */}
+        this.setState({...this.state, categories});
     }
 
     _handleTitleChange(event){
@@ -38,8 +48,9 @@ class FormularioCadastro extends Component{
             onChange={this._handleCategoryChange.bind(this)}
             className="form-cadastro_dropbox">
                 <option>N/A</option>
-            {this.props.categories.map((category)=> {
-                return <option>{category}</option>
+                {/*pegar o this.state para pegar o estado interno*/}
+            {this.state.categories.map((category, index)=> {
+                return <option key ={index}>{category}</option>
             })}
             </select>
             <input 
@@ -56,7 +67,7 @@ class FormularioCadastro extends Component{
             />
             <button 
             className="form-cadastro_input form-cadastro_submit">
-            Criar nota...
+            Criar nota
             </button>
           </form>
 
