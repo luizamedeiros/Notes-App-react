@@ -1,7 +1,9 @@
 import './assets/App.css';
 import './assets/index.css';
 import ListaDeNotas from './componentes/ListaDeNotas/';
+import CategoriesList from './componentes/CategoriesList';
 import FormularioCadastro from './componentes/FormularioCadastro/';
+import SiteHeader from './componentes/SiteHeader';
 import React, { Component } from 'react';
 
 class App extends Component {
@@ -10,14 +12,24 @@ class App extends Component {
         this.notes = [];
         //atribuindo o estado natural
         this.state = {
-            notes: []
-        }
+            notes: [],
+            categories:["Games","Music"]
+        };
 
     }
 
-    createNote(title, note) {
+    addCategory(CategoryName){
+        //"..." opens up a list. Without it, words would start to group together
+        const categoryList = [...this.state.categories, CategoryName]
+        const newCategories = {
+            categories: categoryList
+        }
+        this.setState(newCategories)
+    }
+
+    createNote(title, note, category) {
         // criar novo objeto
-        const newNote = { title, note };
+        const newNote = { title, note, category };
         // criar um novo array
         const newArrayNotes = [...this.state.notes, newNote]
             // criar um novo estado
@@ -39,11 +51,22 @@ class App extends Component {
 
     render() {
         return ( 
-        <section className = "conteudo" >
-            <FormularioCadastro createNote = { this.createNote.bind(this) }/> 
-            <ListaDeNotas 
-            listExcludeNote={this.deleteNote.bind(this)}
-            notes = { this.state.notes }/>
+        <section>
+            <SiteHeader/>
+            <section className = "conteudo" >
+                <FormularioCadastro
+                categories = {this.state.categories}
+                createNote = { this.createNote.bind(this)
+                }/> 
+                <main className="conteudo-principal">
+                    <CategoriesList 
+                    addCategory={this.addCategory.bind(this)} 
+                    categories={this.state.categories}/>
+                    <ListaDeNotas 
+                    listExcludeNote={this.deleteNote.bind(this)}
+                    notes = { this.state.notes }/>
+                </main>
+            </section>
         </section>
         );
     }

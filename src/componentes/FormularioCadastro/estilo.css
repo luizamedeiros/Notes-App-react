@@ -24,6 +24,11 @@
   font-weight: 400;
 }
 
+.form-cadastro_dropbox{
+  margin-top: 8px;
+  background-color: var(--fundo-detalhes);
+  border: none;
+}
 .form-cadastro_submit:active {
   background-color: var(--secundaria-ativa);
 }

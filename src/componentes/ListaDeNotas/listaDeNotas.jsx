@@ -6,7 +6,7 @@ class ListaDeNotas extends Component {
     render() {
         return ( 
         <ul className="lista-notas">
-            {this.props.notes.map((nota, index) =>{
+            {this.props.notes.map((note, index) =>{
                 return(
                     <li className="lista-notas_item" key ={index}>
                         <CardNota 
@@ -14,8 +14,9 @@ class ListaDeNotas extends Component {
                         // passando a propriedade de excluir nota da lista para o filho, onde realmente vou usar o valor
                         //através do props
                         listExcludeNote={this.props.listExcludeNote}
-                        title={nota.title} 
-                        noteText={nota.note}/>
+                        title={note.title} 
+                        noteText={note.note}
+                        category = {note.category}/>
                     </li>
                 );
             })}
